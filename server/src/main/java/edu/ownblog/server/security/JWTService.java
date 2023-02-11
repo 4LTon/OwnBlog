@@ -3,6 +3,7 @@ package edu.ownblog.server.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -69,7 +70,7 @@ public class JWTService {
     }
 
     private Key getSignKey() {
-        byte[] keyBytes = SecurityConstant.SECRET_KEY.getBytes();
+        byte[] keyBytes = Decoders.BASE64.decode(SecurityConstant.SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }
