@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 /**
  * @author Vladislav Glotov <glotov.vd@yandex.ru>
  * @version 1.0.0
@@ -36,6 +38,7 @@ public class AuthenticationService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
+                .createdDate(LocalDateTime.now())
                 .build();
         userRepository.save(user);
         String token = jwtService.generateToken(user);
