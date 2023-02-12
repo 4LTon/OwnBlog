@@ -30,7 +30,7 @@ public class Post {
     private String text;
 
     @Column(name = "views_count", columnDefinition = "bigint default 0")
-    private Long viewsCount = 0L;
+    private int viewsCount = 0;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id", nullable = false)
