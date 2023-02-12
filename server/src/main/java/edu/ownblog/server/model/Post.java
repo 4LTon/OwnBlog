@@ -2,10 +2,7 @@ package edu.ownblog.server.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -15,6 +12,9 @@ import java.time.LocalDateTime;
  */
 
 @Getter @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "posts")
 public class Post {
@@ -29,7 +29,7 @@ public class Post {
     @Column(name = "text", columnDefinition = "text", nullable = false)
     private String text;
 
-    @Column(name = "views_count")
+    @Column(name = "views_count", columnDefinition = "bigint default 0")
     private Long viewsCount = 0L;
 
     @ManyToOne(fetch = FetchType.LAZY)
