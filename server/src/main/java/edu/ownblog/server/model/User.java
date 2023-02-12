@@ -1,5 +1,6 @@
 package edu.ownblog.server.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,12 +10,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.Set;
+import java.time.LocalDateTime;
+import java.util.*;
 
 /**
  * @author Vladislav Glotov <glotov.vd@yandex.ru>
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 @Data
@@ -43,6 +44,13 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Post> posts;
+
+    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss")
+    @Column(name = "create_date", updatable = false)
+    private LocalDateTime createdDate;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
