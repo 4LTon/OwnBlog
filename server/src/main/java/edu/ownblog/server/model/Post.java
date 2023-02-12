@@ -3,6 +3,9 @@ package edu.ownblog.server.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
@@ -11,7 +14,7 @@ import java.time.LocalDateTime;
  * @version 1.0.0
  */
 
-@Data
+@Getter @Setter
 @Entity
 @Table(name = "posts")
 public class Post {
