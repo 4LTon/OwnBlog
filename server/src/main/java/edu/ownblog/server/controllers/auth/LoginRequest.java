@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 @Builder
 @AllArgsConstructor
-public class AuthenticationRequest {
+public class LoginRequest {
 
     private String email;
 

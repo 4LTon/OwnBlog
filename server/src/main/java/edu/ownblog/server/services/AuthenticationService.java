@@ -1,6 +1,6 @@
 package edu.ownblog.server.services;
 
-import edu.ownblog.server.controllers.auth.AuthenticationRequest;
+import edu.ownblog.server.controllers.auth.LoginRequest;
 import edu.ownblog.server.controllers.auth.AuthenticationResponse;
 import edu.ownblog.server.controllers.auth.RegisterRequest;
 import edu.ownblog.server.model.Role;
@@ -45,7 +45,7 @@ public class AuthenticationService {
                 .build();
     }
 
-    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+    public AuthenticationResponse login(LoginRequest request) {
         authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
 
