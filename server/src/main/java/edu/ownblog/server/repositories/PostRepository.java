@@ -11,11 +11,13 @@ import java.util.Optional;
 
 /**
  * @author Vladislav Glotov <glotov.vd@yandex.ru>
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
+
+    Optional<Post> findPostById(Long id);
 
     List<Post> findAllByAuthorOrderByCreatedDateDesc(User user);
 
