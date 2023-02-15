@@ -52,6 +52,14 @@ public class PostService {
         return postRepository.findAllByAuthorOrderByCreatedDateDesc(user);
     }
 
+<<<<<<<<< Temporary merge branch 1
+    public Post getPostById(Long postId, Principal principal) {
+        User user = getUserByPrincipal(principal);
+        Post post = postRepository.findPostByIdAndAuthor(postId, user)
+                .orElseThrow(() -> new PostNotFoundException("Post cannot be found for username: " + user.getEmail()));
+
+        post.setViewsCount(post.getViewsCount() + 1);
+=========
     public Post getPostById(Long postId) {
         Post post = postRepository.findPostById(postId)
                 .orElseThrow(() -> new PostNotFoundException("The post with ID: " + postId + " doesn't exist"));
