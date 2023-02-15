@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 /**
  * @author Vladislav Glotov <glotov.vd@yandex.ru>
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 @Service
@@ -52,18 +52,19 @@ public class PostService {
         return postRepository.findAllByAuthorOrderByCreatedDateDesc(user);
     }
 
-    public Post getPostById(Long postId, Principal principal) {
-        User user = getUserByPrincipal(principal);
-        Post post = postRepository.findPostByIdAndAuthor(postId, user)
-                .orElseThrow(() -> new PostNotFoundException("Post cannot be found for username: " + user.getEmail()));
 
-        post.setViewsCount(post.getViewsCount() + 1);
+    public Post getPostById(Long postId) {
+        Post post = postRepository.findPostById(postId)
+                .orElseThrow(() -> new PostNotFoundException("The post with ID: " + postId + " doesn't exist"));
+
         return post;
     }
 
     public void dropPost(Long postId, Principal principal) {
-        Post post = getPostById(postId, principal);
-        postRepository.delete(post);
+        Post post = getPostById(postId);
+        if (post.getAuthor() == getUserByPrincipal(principal)) {
+            postRepository.delete(post);
+        }
     }
 
     private User getUserByPrincipal(Principal principal) {

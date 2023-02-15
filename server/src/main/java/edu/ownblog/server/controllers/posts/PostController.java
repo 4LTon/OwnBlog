@@ -32,8 +32,8 @@ public class PostController {
     }
 
     @GetMapping("/{postId}")
-    public ResponseEntity<PostResponse> getPostById(@PathVariable Long postId, Principal principal) {
-        return ResponseEntity.ok(new PostResponse(postService.getPostById(postId, principal)));
+    public ResponseEntity<PostResponse> getPostById(@PathVariable Long postId) {
+        return ResponseEntity.ok(new PostResponse(postService.getPostById(postId)));
     }
 
     @DeleteMapping("/{postId}")
