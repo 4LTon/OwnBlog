@@ -3,14 +3,21 @@ server:
 
 
 spring:
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
   jpa:
     database: postgresql
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none
 
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/ownblog_dev
     username: root
     password: root
+
+#logging:
+#  pattern:
+#    console: "%d{HH:mm:ss} > %C{1.} [%clr(%5p)]: %msg%n"
