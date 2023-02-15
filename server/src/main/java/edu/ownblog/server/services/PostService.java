@@ -52,6 +52,7 @@ public class PostService {
         return postRepository.findAllByAuthorOrderByCreatedDateDesc(user);
     }
 
+
     public Post getPostById(Long postId) {
         Post post = postRepository.findPostById(postId)
                 .orElseThrow(() -> new PostNotFoundException("The post with ID: " + postId + " doesn't exist"));
